@@ -24,14 +24,15 @@ class App extends Component {
       multiline: [],
       returnInput: true,
       returnAddress: true,
-      returnParcel: false,
-      returnCoordinates: false,
+      returnParcel: true,
+      returnCoordinates: true,
       fetchedResults: false,
       results: []
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.handleExit = this.handleExit.bind(this)
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
   }
 
@@ -42,7 +43,7 @@ class App extends Component {
   };
 
   handleClick = event => {
-    const geocodeUrl = `https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/geocodeAddresses`
+    const geocodeUrl = `https://gis.detroitmi.gov/arcgis/rest/services/DoIT/CompositeGeocoder/GeocodeServer/geocodeAddresses`
     const addresses = { 
       records: this.state.multiline.map((a, i) => {
         return { 
@@ -80,19 +81,26 @@ class App extends Component {
     this.setState({ [name]: event.target.checked})
   }
 
+  handleExit = () => {
+    this.setState({fetchedResults: false})
+  }
+
   render() {
     return (
       <div className="App">
 
 
-        {this.state.fetchedResults ? 
+        {this.state.fetchedResults ?
+          <div>
           <GeocodeResults 
             results={this.state.results}
             includeInput={this.state.returnInput}
             includeAddress={this.state.returnAddress}
             includeParcel={this.state.returnParcel}
             includeCoordinates={this.state.returnCoordinates}
-            /> :         
+            /> 
+          <Button variant='outlined' onClick={this.handleExit}>Return</Button>
+          </div>:         
             <div><TextField
             id="multiline-flexible"
             label="Enter addresses here"
