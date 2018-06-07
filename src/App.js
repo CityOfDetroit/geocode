@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import _ from 'lodash';
 import './App.css';
 
@@ -33,37 +32,32 @@ class App extends Component {
   }
 
   handleClick = event => {
-    const geocodeUrl = `https://gis.detroitmi.gov/arcgis/rest/services/DoIT/CompositeGeocoder/GeocodeServer/geocodeAddresses`
+    const geocodeUrl = `https://gis.detroitmi.gov/arcgis/rest/services/DoIT/CompositeGeocoder/GeocodeServer/geocodeAddresses`;
     const addresses = { 
       records: this.state.multiline.map((a, i) => {
         return { 
           "attributes": {"OBJECTID": i, "SingleLine": a}
         }
-    })}
-    console.log(JSON.stringify(addresses))
+    })};
 
     const bodyFormData = new FormData();
-    bodyFormData.set('addresses', JSON.stringify(addresses))
-    bodyFormData.set('f', 'json')
-    bodyFormData.set('outSR', 4326)
+    bodyFormData.set('addresses', JSON.stringify(addresses));
+    bodyFormData.set('f', 'json');
+    bodyFormData.set('outSR', 4326);
 
     fetch(geocodeUrl, {
       body: bodyFormData,
       method: 'POST'
     }).then(r => r.json()).then(r => {
-
-      // const sortedResults = r.data.locations.sort((a, b) => { return a.attributes.ResultID > b.attributes.ResultID })
-      const sortedResults = _.sortBy(r.locations, 'attributes.ResultID')
-      console.log(this.state.multiline)
-      console.log(sortedResults)
+      const sortedResults = _.sortBy(r.locations, 'attributes.ResultID');
       this.setState({
         fetchedResults: true,
         results: this.state.multiline.map((a, i) => {
           return {"input": a, "answer": sortedResults[i]}
         })
-      })
-    })
-  };
+      });
+    }).catch(e => console.log(e));
+  }
 
   handleCheckboxChange = name => event => {
     this.setState({ [name]: event.target.checked });

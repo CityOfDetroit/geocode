@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -60,6 +61,17 @@ class Inputs extends Component {
       </div>
     );
   }
+}
+
+Inputs.propTypes = {
+  handleClick: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleCheckboxChange: PropTypes.func,
+  multiline: PropTypes.array,
+  returnInput: PropTypes.bool,
+  returnAddress: PropTypes.bool,
+  returnParcel: PropTypes.bool,
+  returnCoordinates: PropTypes.bool,
 }
 
 export default Inputs;
