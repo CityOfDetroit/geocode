@@ -47,14 +47,13 @@ class App extends Component {
     bodyFormData.set('f', 'json')
     bodyFormData.set('outSR', 4326)
 
-    axios({
-      url: geocodeUrl,
-      method: 'post',
-      data: bodyFormData
-    }).then(r => {
+    fetch(geocodeUrl, {
+      body: bodyFormData,
+      method: 'POST'
+    }).then(r => r.json()).then(r => {
 
       // const sortedResults = r.data.locations.sort((a, b) => { return a.attributes.ResultID > b.attributes.ResultID })
-      const sortedResults = _.sortBy(r.data.locations, 'attributes.ResultID')
+      const sortedResults = _.sortBy(r.locations, 'attributes.ResultID')
       console.log(this.state.multiline)
       console.log(sortedResults)
       this.setState({
