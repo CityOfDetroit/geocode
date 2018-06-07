@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 class Results extends Component {
   render() {
     return (
-      <div>
+      <div style={{ margin: '1em', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <Table>
           <TableBody>
             {this.props.results.map((r, i) => (
@@ -23,10 +23,11 @@ class Results extends Component {
             ))}
           </TableBody>
         </Table>
-        
-        <Button variant='outlined' onClick={this.props.handleExit}>
-          Start Over
-        </Button>
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '1em' }}>
+          <Button variant="contained" color="secondary" onClick={this.props.handleExit}>
+            Start Over
+          </Button>
+        </div>
       </div>
     );
   }
