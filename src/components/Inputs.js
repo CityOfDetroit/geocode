@@ -25,7 +25,8 @@ class Inputs extends Component {
                 rowsMax="1000"
                 value={this.props.multiline.join("\n")}
                 onChange={this.props.handleChange}
-                margin="normal"/>
+                margin="normal"
+                style={{width: '100%'}}/>
             </CardContent>
         </Card>
         <Card style={{ margin: '1em', width: '400px' }}>

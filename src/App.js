@@ -4,6 +4,8 @@ import './App.css';
 
 import Inputs from './components/Inputs';
 import Results from './components/Results';
+import Intro from './components/Intro';
+import Summary from './components/Summary'
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +29,7 @@ class App extends Component {
 
   handleChange = event => {
     this.setState({
-      multiline: event.target.value.split("\n")
+      multiline: event.target.value.split("\n"),
     });
   }
 
@@ -71,22 +73,29 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.fetchedResults ?
+        <div>
+          <Summary results={this.state.results} />
           <Results 
             results={this.state.results}
             includeInput={this.state.returnInput}
             includeAddress={this.state.returnAddress}
             includeParcel={this.state.returnParcel}
             includeCoordinates={this.state.returnCoordinates}
-            handleExit={this.handleExit} /> 
-        : <Inputs
-            handleClick={this.handleClick} 
-            handleChange={this.handleChange}
-            handleCheckboxChange={this.handleCheckboxChange}
-            multiline={this.state.multiline}
-            returnInput={this.state.returnInput}
-            returnAddress={this.state.returnAddress}
-            returnParcel={this.state.returnParcel}
-            returnCoordinates={this.state.returnCoordinates} />
+            handleExit={this.handleExit} />
+        </div>
+        : 
+        <div>
+          <Intro />
+          <Inputs
+              handleClick={this.handleClick} 
+              handleChange={this.handleChange}
+              handleCheckboxChange={this.handleCheckboxChange}
+              multiline={this.state.multiline}
+              returnInput={this.state.returnInput}
+              returnAddress={this.state.returnAddress}
+              returnParcel={this.state.returnParcel}
+              returnCoordinates={this.state.returnCoordinates} />
+        </div>
         }
       </div>
     );
