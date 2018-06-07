@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
-import logo from './logo.svg';
 import './App.css';
 
-import TextField from '@material-ui/core/TextField';
-import Checkbox from '@material-ui/core/Checkbox'
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Button from '@material-ui/core/Button'
-
-import GeocodeResults from './components/GeocodeResults'
+import Inputs from './components/Inputs';
+import Results from './components/Results';
 
 class App extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       multiline: [],
@@ -30,17 +20,17 @@ class App extends Component {
       results: []
     }
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
-    this.handleExit = this.handleExit.bind(this)
-    this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleExit = this.handleExit.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
   }
 
   handleChange = event => {
     this.setState({
-      multiline: event.target.value.split("\n"),
+      multiline: event.target.value.split("\n")
     });
-  };
+  }
 
   handleClick = event => {
     const geocodeUrl = `https://gis.detroitmi.gov/arcgis/rest/services/DoIT/CompositeGeocoder/GeocodeServer/geocodeAddresses`
@@ -74,92 +64,37 @@ class App extends Component {
         })
       })
     })
-
   };
 
   handleCheckboxChange = name => event => {
-    this.setState({ [name]: event.target.checked})
+    this.setState({ [name]: event.target.checked });
   }
 
   handleExit = () => {
-    this.setState({fetchedResults: false})
+    this.setState({ fetchedResults: false });
   }
 
   render() {
     return (
       <div className="App">
-
-
         {this.state.fetchedResults ?
-          <div>
-          <GeocodeResults 
+          <Results 
             results={this.state.results}
             includeInput={this.state.returnInput}
             includeAddress={this.state.returnAddress}
             includeParcel={this.state.returnParcel}
             includeCoordinates={this.state.returnCoordinates}
-            /> 
-          <Button variant='outlined' onClick={this.handleExit}>Return</Button>
-          </div>:         
-            <div><TextField
-            id="multiline-flexible"
-            label="Enter addresses here"
-            multiline
-            rowsMax="1000"
-            value={this.state.multiline.join("\n")}
-            onChange={this.handleChange}
-            margin="normal"
-          />
-  
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Geocoding options</FormLabel>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                  value="Include my original input"
-                  checked={this.state.returnInput}
-                  onChange={this.handleCheckboxChange('returnInput')}
-                />
-                }
-                label="Return original input"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                  value="Matched address"
-                  checked={this.state.returnAddress}
-                  onChange={this.handleCheckboxChange('returnAddress')}
-                />
-                }
-                label="Return matched address"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                  value="Parcel ID"
-                  checked={this.state.returnParcel}
-                  onChange={this.handleCheckboxChange('returnParcel')}
-                />
-                }
-                label="Return parcel number"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                  value="Coordinates"
-                  checked={this.state.returnCoordinates}
-                  onChange={this.handleCheckboxChange('returnCoordinates')}
-                />
-                }
-                label="Return address coordinates"
-              />
-            </FormGroup>
-          </FormControl>
-  
-          <Button variant="outlined" onClick={this.handleClick}>
-            Geocode em
-          </Button></div>}
+            handleExit={this.handleExit} /> 
+        : <Inputs
+            handleClick={this.handleClick} 
+            handleChange={this.handleChange}
+            handleCheckboxChange={this.handleCheckboxChange}
+            multiline={this.state.multiline}
+            returnInput={this.state.returnInput}
+            returnAddress={this.state.returnAddress}
+            returnParcel={this.state.returnParcel}
+            returnCoordinates={this.state.returnCoordinates} />
+        }
       </div>
     );
   }
