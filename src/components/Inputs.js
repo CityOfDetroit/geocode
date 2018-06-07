@@ -34,33 +34,33 @@ class Inputs extends Component {
               <FormControl component="fieldset">
                 <FormGroup>
                     <FormControlLabel
-                    control={
+                      control={
                         <Checkbox
                         value="Include my original input"
                         checked={this.props.returnInput}
                         onChange={this.props.handleCheckboxChange('returnInput')} />}
-                    label="Original input" />
+                      label="Original input" />
                     <FormControlLabel
-                    control={
+                      control={
                         <Checkbox
                         value="Matched address"
                         checked={this.props.returnAddress}
                         onChange={this.props.handleCheckboxChange('returnAddress')} />}
-                    label="Matched address" />
+                      label="Matched address" />
                     <FormControlLabel
-                    control={
+                      control={
                         <Checkbox
                         value="Parcel ID"
                         checked={this.props.returnParcel}
                         onChange={this.props.handleCheckboxChange('returnParcel')} />}
-                    label="Parcel number" />
+                      label="Parcel number" />
                     <FormControlLabel
-                    control={
+                      control={
                         <Checkbox
                         value="Coordinates"
                         checked={this.props.returnCoordinates}
                         onChange={this.props.handleCheckboxChange('returnCoordinates')} />}
-                    label="Geographic coordinates" />
+                      label="Geographic coordinates" />
                 </FormGroup>
               </FormControl>
             </CardContent>
