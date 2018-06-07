@@ -2,7 +2,7 @@
   "name": "geocode",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://cityofdetroit.github.io/geocode"
+  "homepage": "https://cityofdetroit.github.io/geocode",
   "dependencies": {
     "@material-ui/core": "^1.2.0",
     "gh-pages": "^1.2.0",
