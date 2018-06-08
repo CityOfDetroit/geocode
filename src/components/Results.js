@@ -4,22 +4,32 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
 import Button from '@material-ui/core/Button';
 
 class Results extends Component {
   render() {
     return (
-      <div style={{ margin: '1em', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <div style={{ margin: '1em', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
         {this.props.results.length !== 0 ?
-          <Table>
+          <Table style={{ margin: '.5em', width: '100%' }}>
+            <TableHead>
+                <TableRow>
+                  {this.props.includeInput ? <TableCell style={{padding: 5}}>Input</TableCell> : null}
+                  {this.props.includeAddress ? <TableCell style={{padding: 5}}>Address</TableCell> : null}
+                  {this.props.includeParcel ? <TableCell style={{padding: 5}}>Parcel</TableCell> : null}
+                  {this.props.includeCoordinates ? <TableCell style={{padding: 5}}>Lat</TableCell> : null}
+                  {this.props.includeCoordinates ? <TableCell style={{padding: 5}}>Lng</TableCell> : null}
+                </TableRow>
+            </TableHead>
             <TableBody>
               {this.props.results.map((r, i) => (
                 <TableRow key={i}>
-                  {this.props.includeInput ? <TableCell>{r.input}</TableCell> : null}
-                  {this.props.includeAddress ? <TableCell>{r.answer.address}</TableCell> : null}
-                  {this.props.includeParcel ? <TableCell>{r.answer.attributes.User_fld}</TableCell> : null}
-                  {this.props.includeCoordinates ? <TableCell>{r.answer.location.y !== 'NaN' ? r.answer.location.y.toFixed(6) : ``}</TableCell> : null}
-                  {this.props.includeCoordinates ? <TableCell>{r.answer.location.x !== 'NaN' ? r.answer.location.x.toFixed(6) : ``}</TableCell> : null}
+                  {this.props.includeInput ? <TableCell style={{padding: 5}}>{r.input}</TableCell> : null}
+                  {this.props.includeAddress ? <TableCell style={{padding: 5}}>{r.answer.address}</TableCell> : null}
+                  {this.props.includeParcel ? <TableCell style={{padding: 5}}>{r.answer.attributes.User_fld}</TableCell> : null}
+                  {this.props.includeCoordinates ? <TableCell style={{padding: 5}}>{r.answer.location.y !== 'NaN' ? r.answer.location.y.toFixed(6) : ``}</TableCell> : null}
+                  {this.props.includeCoordinates ? <TableCell style={{padding: 5}}>{r.answer.location.x !== 'NaN' ? r.answer.location.x.toFixed(6) : ``}</TableCell> : null}
                 </TableRow>
               ))}
             </TableBody>

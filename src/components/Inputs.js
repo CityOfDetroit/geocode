@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button';
 class Inputs extends Component {
   render() {
     return (
-      <div style={{ marginTop: '1em', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ marginTop: '1em', display: 'flex', flexDirection: window.innerWidth < 700 ? 'column' : 'row', justifyContent: 'center' }}>
         <Card style={{ margin: '1em' }}>
           <CardHeader title="1. Enter your addresses" subheader="Copy + paste from a spreadsheet or type an address per line" />
             <CardContent>
@@ -27,9 +27,10 @@ class Inputs extends Component {
                 onChange={this.props.handleChange}
                 margin="normal"
                 style={{width: '100%'}}/>
+              <span style={{fontSize: '.9em', color: '#222'}}>Addresses entered: {this.props.multiline.filter(m => { return m !== '' }).length}</span> 
             </CardContent>
         </Card>
-        <Card style={{ margin: '1em', width: '400px' }}>
+        <Card style={{ margin: '1em', width: window.innerWidth < 700 ? `` : 400 }}>
           <CardHeader title="2. Pick your output" subheader="What fields do you want returned?" />
             <CardContent>
               <FormControl component="fieldset">
@@ -66,7 +67,7 @@ class Inputs extends Component {
               </FormControl>
             </CardContent>
         </Card>
-        <Card style={{ margin: '1em', width: '400px' }}>
+        <Card style={{ margin: '1em', width: window.innerWidth < 700 ? `` : 400 }}>
           <CardHeader title="3. Geocode!" subheader="Generate a table of geocoded addresses that you can copy + paste into your own workflow" />       
             <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
               <Button variant="contained" color="primary" onClick={this.props.handleClick} style={{ fontWeight: 700 }}>
