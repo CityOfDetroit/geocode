@@ -39,7 +39,11 @@ class Results extends Component {
         : <span style={{ display: 'flex', justifyContent: 'center' }}>You didn't enter any addresses!</span>}
 
         <div style={{ display: 'flex', justifyContent: 'center', margin: '1em' }}>
-          {this.props.results.length !== 0 ? <Csv results={this.props.results} /> : null}
+          {this.props.results.length !== 0 ? 
+            <div>
+              <Csv results={this.props.results} />
+              <Csv results={this.props.results} excelFormat style={{ marginLeft: '1em' }}/>
+            </div> : null}
           <Button variant="contained" color="secondary" onClick={this.props.handleExit} style={{ marginLeft: '1em' }}>
             Start Over
           </Button>
