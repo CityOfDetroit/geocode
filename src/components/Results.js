@@ -7,6 +7,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import Button from '@material-ui/core/Button';
 
+import Csv from './Csv';
+
 class Results extends Component {
   render() {
     return (
@@ -33,9 +35,16 @@ class Results extends Component {
                 </TableRow>
               ))}
             </TableBody>
-          </Table> : <span style={{ display: 'flex', justifyContent: 'center' }}>You didn't enter any addresses!</span>}
+          </Table> 
+        : <span style={{ display: 'flex', justifyContent: 'center' }}>You didn't enter any addresses!</span>}
+
         <div style={{ display: 'flex', justifyContent: 'center', margin: '1em' }}>
-          <Button variant="contained" color="secondary" onClick={this.props.handleExit}>
+          {this.props.results.length !== 0 ? 
+            <div>
+              <Csv results={this.props.results} />
+              <Csv results={this.props.results} excelFormat/>
+            </div> : null}
+          <Button variant="contained" color="secondary" onClick={this.props.handleExit} style={{ marginLeft: '1em' }}>
             Start Over
           </Button>
         </div>

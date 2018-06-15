@@ -1,15 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import _ from 'lodash';
 
 const Summary = ({results}) => {
-
   const answers = results.map(r => {return r.answer})
-  console.log(answers)
   const matched = _.filter(answers, a => {return a.attributes.Status === 'M'})
-  console.log(matched)
   const unmatched = answers.length - matched.length
   const addrPointMatched = answers.filter(a => { return a.attributes.Status === 'M' && a.attributes.Loc_name === 'AddressPointGe'})
   const centerlineMatched = answers.filter(a => { return a.attributes.Status === 'M' && a.attributes.Loc_name === 'StreetCenterli'})
