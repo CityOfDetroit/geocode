@@ -42,7 +42,7 @@ class Results extends Component {
           {this.props.results.length !== 0 ? 
             <div>
               <Csv results={this.props.results} />
-              <Csv results={this.props.results} excelFormat style={{ marginLeft: '1em' }}/>
+              <Csv results={this.props.results} excelFormat/>
             </div> : null}
           <Button variant="contained" color="secondary" onClick={this.props.handleExit} style={{ marginLeft: '1em' }}>
             Start Over
