@@ -12,7 +12,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      multiline: ['2806 Cambridge', '1234 Fake', '1611 Hubbard'],
+      multiline: [],
       returnInput: true,
       returnAddress: true,
       returnParcel: true,

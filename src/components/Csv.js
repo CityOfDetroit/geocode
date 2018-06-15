@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CSVLink } from 'react-csv';
 import Button from '@material-ui/core/Button';
-import { ENGINE_METHOD_CIPHERS } from 'constants';
 
 class Csv extends Component {
   render() {
