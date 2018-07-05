@@ -13,7 +13,7 @@ const Intro = () => {
           <li>The city's <a href="http://gis.detroitmi.gov/arcgis/rest/services/DoIT/CompositeGeocoder/GeocodeServer">composite geocoder</a> will return results for each address.</li>
           <li>Addresses should only consist of a street number and street name - <b>don't include</b> a state, city, or zip.</li>
           <li>All addresses should be in <b>Detroit only.</b></li>
-          <li>Want to know more? <a href="https://cityofdetroit.github.io/iet">Read our blog post!</a></li>
+          <li>Want to know more? <a href="https://cityofdetroit.github.io/iet/blog/geocoding/">Read our blog post!</a></li>
           
         </ul>
       </CardContent>

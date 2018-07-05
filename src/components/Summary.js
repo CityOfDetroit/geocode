@@ -6,10 +6,10 @@ import _ from 'lodash';
 
 const Summary = ({results}) => {
   const answers = results.map(r => {return r.answer})
-  const matched = _.filter(answers, a => {return a.attributes.Status === 'M'})
+  const matched = _.filter(answers, a => {return (a.attributes.Status === 'M' || a.attributes.Status === 'T')})
   const unmatched = answers.length - matched.length
-  const addrPointMatched = answers.filter(a => { return a.attributes.Status === 'M' && a.attributes.Loc_name === 'AddressPointGe'})
-  const centerlineMatched = answers.filter(a => { return a.attributes.Status === 'M' && a.attributes.Loc_name === 'StreetCenterli'})
+  const addrPointMatched = answers.filter(a => { return (a.attributes.Status === 'M' || a.attributes.Status === 'T') && a.attributes.Loc_name === 'AddressPointGe'})
+  const centerlineMatched = answers.filter(a => { return (a.attributes.Status === 'M' || a.attributes.Status === 'T') && a.attributes.Loc_name === 'StreetCenterli'})
 
   return (
     <Card>
